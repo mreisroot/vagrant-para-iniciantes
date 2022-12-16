@@ -1,0 +1,18 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/bullseye64"
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 512
+    v.cpus = 1
+    v.name = "vagrant-shell_2"
+  end
+
+  $script = <<-SCRIPT
+    echo I am provisioning...
+    date > /etc/vagrant_provisioned_at
+  SCRIPT
+
+  # Configurando o provisionamento a partir de uma sequência média de comandos
+  config.vm.provision "shell", inline: $script
+
+end

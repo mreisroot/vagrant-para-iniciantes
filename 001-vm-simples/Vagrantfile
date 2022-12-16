@@ -1,0 +1,27 @@
+Vagrant.configure("2") do |config|
+
+  # Definindo a imagem vagrant que será utilizada
+  config.vm.box = "debian/bullseye64"
+
+  # Configuração de espaço de disco
+  # Atenção, só é possível configurar o espaço de disco com o plugin vagrant-disksize.
+  # Instale o vagrant-disksize com o comando:
+  # vagrant plugin install vagrant-disksize
+  config.disksize.size = "25GB"
+  
+  # Configurando redes
+  
+  # Rede privada com ip automático gerado pelo DHCP
+  # config.vm.network "private_network", type: "dhcp"
+
+  # Rede publica com interface ponte
+  config.vm.network "public_network", bridge: "wlan0"
+
+  # Configurando o provedor, alocação de recursos e nome da VM
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 512
+    v.cpus = 1
+    v.name = "debian-bullseye-laboratorio"
+  end
+
+end
